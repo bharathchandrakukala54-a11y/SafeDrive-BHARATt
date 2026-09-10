@@ -21,6 +21,8 @@ interface SidebarProps {
   setIsSimRunning: (val: boolean | ((prev: boolean) => boolean)) => void;
   threatLevel: number;
   roadSector: string;
+  isMobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -30,6 +32,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setIsSimRunning,
   threatLevel,
   roadSector,
+  isMobileOpen = false,
+  onCloseMobile,
 }) => {
   const menuItems = [
     { id: "perception", label: "Perception Fusion", icon: Radar },
@@ -40,7 +44,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   return (
-    <aside className="fixed left-0 top-16 bottom-0 w-64 lg:w-72 bg-surface-container-lowest/95 backdrop-blur-2xl z-40 flex flex-col justify-between py-4 border-r border-surface-container-high/80 shadow-[4px_0_24px_rgba(0,0,0,0.6)]">
+    <>
+      {/* Mobile Drawer Backdrop */}
+      {isMobileOpen && (
+        <div
+          onClick={onCloseMobile}
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-30 lg:hidden transition-opacity"
+        />
+      )}
+
+      <aside
+        className={`fixed left-0 top-16 bottom-0 w-64 lg:w-72 bg-surface-container-lowest/95 backdrop-blur-2xl z-40 flex flex-col justify-between py-4 border-r border-surface-container-high/80 shadow-[4px_0_24px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-in-out ${
+          isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
       <div className="flex flex-col gap-5 px-4">
         {/* Subsystem Telemetry Mini Box */}
         <div className="flex flex-col gap-2 bg-surface-container-low/80 p-3 rounded-lg border border-surface-container-high/70 shadow-inner">
@@ -93,7 +110,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => {
+                  setActiveTab(item.id);
+                  onCloseMobile?.();
+                }}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-md transition-all text-left cursor-pointer group ${
                   isActive
                     ? "bg-primary-container text-on-primary-container font-bold shadow-[0_0_18px_rgba(0,240,255,0.35)]"
@@ -159,5 +179,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </button>
       </div>
     </aside>
+    </>
   );
 };

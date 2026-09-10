@@ -2,13 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { User, AlertTriangle, Activity, Wifi, ShieldAlert } from "lucide-react";
+import { User, AlertTriangle, Activity, Wifi, ShieldAlert, Menu, X } from "lucide-react";
 
 interface HeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   onEmergencyOverride: () => void;
   isEmergencyActive: boolean;
+  isMobileMenuOpen?: boolean;
+  onToggleMobileMenu?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,6 +18,8 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   onEmergencyOverride,
   isEmergencyActive,
+  isMobileMenuOpen,
+  onToggleMobileMenu,
 }) => {
   const [timeString, setTimeString] = useState<string>("08:42:19.402");
 
@@ -43,8 +47,21 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/85 backdrop-blur-xl border-b border-surface-container-high/60 shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
       <div className="h-16 w-full px-4 lg:px-6 flex items-center justify-between gap-4">
-        {/* Brand Identification */}
+        {/* Mobile Hamburger Menu Toggle + Brand */}
         <div className="flex items-center gap-3 shrink-0">
+          {onToggleMobileMenu && (
+            <button
+              onClick={onToggleMobileMenu}
+              aria-label="Toggle Navigation Drawer"
+              className="lg:hidden p-2 rounded-lg bg-surface-container-low border border-surface-container-high text-on-surface hover:text-primary transition-colors cursor-pointer"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5 text-primary" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
+          )}
           <div className="relative w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-low border border-primary/30 shadow-[0_0_12px_rgba(0,240,255,0.25)]">
             <Image
               src="/logo.svg"
@@ -58,7 +75,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="font-headline font-bold text-sm lg:text-base text-primary tracking-tight uppercase leading-none">
               SafeDrive AI Perception Core
             </span>
-            <span className="font-mono text-[10px] text-on-surface-variant tracking-wider uppercase">
+            <span className="font-mono text-[9px] sm:text-[10px] text-on-surface-variant tracking-wider uppercase">
               Unstructured Road AV Stack // v4.8-IND
             </span>
           </div>

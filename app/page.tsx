@@ -105,9 +105,10 @@ export default function Home() {
   const [selectedSector, setSelectedSector] = useState<string>("IND-DEL-NH48");
   const [isChaosActive, setIsChaosActive] = useState<boolean>(false);
 
-  // Emergency Modal
+  // Emergency Modal & Mobile Navigation
   const [isOverrideModalOpen, setIsOverrideModalOpen] = useState<boolean>(false);
   const [isOverrideActive, setIsOverrideActive] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   // Dynamic Telemetry Loop
   useEffect(() => {
@@ -229,6 +230,8 @@ export default function Home() {
         setActiveTab={setActiveTab}
         onEmergencyOverride={() => setIsOverrideModalOpen(true)}
         isEmergencyActive={isOverrideActive}
+        isMobileMenuOpen={isMobileMenuOpen}
+        onToggleMobileMenu={() => setIsMobileMenuOpen((prev) => !prev)}
       />
 
       {/* Left HUD Telemetry Sidebar */}
@@ -239,6 +242,8 @@ export default function Home() {
         setIsSimRunning={setIsSimRunning}
         threatLevel={threatLevel}
         roadSector={selectedSector}
+        isMobileOpen={isMobileMenuOpen}
+        onCloseMobile={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Main Subsystem Rails Container */}
