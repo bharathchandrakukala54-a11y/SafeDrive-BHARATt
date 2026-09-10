@@ -1,0 +1,712 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-fixed": "#2a1700",
+          "surface-dim": "#0f131c",
+          "surface-container-high": "#262a33",
+          "surface-container-highest": "#31353e",
+          "on-background": "#dfe2ee",
+          "surface-tint": "#00dbe9",
+          "on-primary": "#00363a",
+          "inverse-primary": "#006970",
+          "on-secondary-fixed": "#002113",
+          "surface": "#0f131c",
+          "surface-bright": "#353942",
+          "background": "#0f131c",
+          "on-surface-variant": "#b9cacb",
+          "on-surface": "#dfe2ee",
+          "on-primary-fixed": "#002022",
+          "on-secondary": "#003824",
+          "on-primary-container": "#006970",
+          "primary-container": "#00f0ff",
+          "surface-variant": "#31353e",
+          "on-tertiary-container": "#855300",
+          "on-error-container": "#ffdad6",
+          "surface-container-lowest": "#0a0e16",
+          "tertiary-fixed-dim": "#ffb95f",
+          "outline-variant": "#3b494b",
+          "error-container": "#93000a",
+          "tertiary": "#fff3ea",
+          "primary-fixed-dim": "#00dbe9",
+          "outline": "#849495",
+          "surface-container": "#1c2028",
+          "surface-container-low": "#181c24",
+          "inverse-on-surface": "#2c3039",
+          "tertiary-container": "#ffd19c",
+          "primary": "#dbfcff",
+          "error": "#ffb4ab",
+          "on-tertiary-fixed-variant": "#653e00",
+          "secondary-fixed": "#6ffbbe",
+          "on-error": "#690005",
+          "secondary-container": "#00a572",
+          "on-tertiary": "#472a00",
+          "on-secondary-container": "#00311f",
+          "primary-fixed": "#7df4ff",
+          "tertiary-fixed": "#ffddb8",
+          "secondary-fixed-dim": "#4edea3",
+          "secondary": "#4edea3",
+          "on-primary-fixed-variant": "#004f54",
+          "inverse-surface": "#dfe2ee",
+          "on-secondary-fixed-variant": "#005236"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "space-md": "1rem",
+          "margin-edge": "1.5rem",
+          "space-2xl": "3rem",
+          "space-lg": "1.5rem",
+          "space-xl": "2rem",
+          "space-2xs": "0.125rem",
+          "space-sm": "0.5rem",
+          "gutter-hud": "0.75rem"
+        },
+        "fontFamily": {
+          "body-lg": [
+            "Geist"
+          ],
+          "headline-lg": [
+            "Space Grotesk"
+          ],
+          "display-lg-mobile": [
+            "Space Grotesk"
+          ],
+          "label-caps": [
+            "Space Grotesk"
+          ],
+          "headline-sm": [
+            "Space Grotesk"
+          ],
+          "display-sm": [
+            "Space Grotesk"
+          ],
+          "body-sm": [
+            "Geist"
+          ],
+          "label-telemetry": [
+            "JetBrains Mono"
+          ],
+          "body-md": [
+            "Geist"
+          ],
+          "display-lg": [
+            "Space Grotesk"
+          ],
+          "label-code": [
+            "JetBrains Mono"
+          ]
+        },
+        "fontSize": {
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg-mobile": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "label-caps": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.12em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-sm": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "0em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-sm": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "label-telemetry": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0.04em",
+              "fontWeight": "500"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg": [
+            "56px",
+            {
+              "lineHeight": "64px",
+              "letterSpacing": "-0.03em",
+              "fontWeight": "700"
+            }
+          ],
+          "label-code": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.06em",
+              "fontWeight": "400"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><img alt="SafeDrive AI Perception Core Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UNRl9o4VbuvJIrg3MR4BKJ_iaDhBf-XGaG0iRRQUv1lGyn0dCWKyoQFwATOWhMMn8vrhFipQao7dWHGhKb9BeprWNp7p4saAOC4LjXKvpXwpbFrFuELcXBXXgSEFHRMxk8uaVy89w2cJOgQtPlaKeaHgWH0KzOJI5WumrNvqBt34Rdm2vZn3jNN0WFfTSlKuW7kuV1T8v9wmLaJHDw6M5XpqUeZu--o_CytQMW_VvNhge_zZh7ec9HRq3R"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight uppercase leading-none">SafeDrive AI Perception Core</span><span class="font-label-code text-label-code text-on-surface-variant tracking-wider uppercase">Unstructured Road AV Stack // v4.8-IND</span></div></div><div class="hidden xl:flex items-center gap-space-md bg-surface-container-low/90 px-space-md py-space-xs rounded-full shadow-[0_0_12px_rgba(0,219,233,0.08)]"><div class="flex items-center gap-space-xs"><span class="inline-block w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.8)] animate-pulse"></span><span class="font-label-telemetry text-label-telemetry text-secondary uppercase">HUD Telemetry Online</span></div><span class="text-outline-variant font-label-code text-label-code">|</span><span class="font-label-telemetry text-label-telemetry text-primary-fixed">120 FPS</span><span class="text-outline-variant font-label-code text-label-code">|</span><span class="font-label-telemetry text-label-telemetry text-on-surface-variant">CAN-Bus Linked</span><span class="text-outline-variant font-label-code text-label-code">|</span><span class="font-label-code text-label-code text-outline">UTC 08:42:19.402</span></div><nav class="hidden 2xl:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm font-semibold shadow-[0_0_16px_rgba(0,240,255,0.4)]"><a class="px-space-sm py-space-xs font-label-caps text-label-caps uppercase transition-colors text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-DEFAULT" data-path="perception-and-sensor-fusion" href="#">Perception &amp; Sensor Fusion</a><a class="px-space-sm py-space-xs font-label-caps text-label-caps uppercase transition-colors text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-DEFAULT" data-path="adaptive-safety-bubble" href="#">Adaptive Safety Bubble</a><a class="px-space-sm py-space-xs font-label-caps text-label-caps uppercase transition-colors text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-DEFAULT" data-path="dynamic-path-generator" href="#">Dynamic Path Generator</a><a class="px-space-sm py-space-xs font-label-caps text-label-caps uppercase transition-colors text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-DEFAULT" data-path="collision-and-risk-matrix" href="#">Collision &amp; Risk Matrix</a><a class="px-space-sm py-space-xs font-label-caps text-label-caps uppercase transition-colors text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-DEFAULT" data-path="vehicle-controller-actuation" href="#">Vehicle Controller Actuation</a></nav><div class="flex items-center gap-space-md shrink-0"><button class="bg-error-container hover:bg-error text-on-error-container hover:text-on-error px-space-md py-space-xs rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(239,68,68,0.35)] active:scale-95">Emergency Override</button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-lowest/90 backdrop-blur-xl z-40 flex flex-col justify-between py-space-md shadow-[1px_0_12px_rgba(0,0,0,0.5)]"><div class="flex flex-col gap-space-lg px-space-md"><div class="flex flex-col gap-space-xs pb-space-sm bg-surface-container-low/60 p-space-sm rounded-DEFAULT"><div class="flex items-center justify-between"><span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Cockpit Mode</span><span class="font-label-code text-label-code text-primary-fixed">AUTONOMOUS L4</span></div><div class="flex items-center justify-between"><span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Threat Index</span><span class="font-label-telemetry text-label-telemetry text-secondary font-bold">NOMINAL // 12%</span></div><div class="flex items-center justify-between"><span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Dynamic Latency</span><span class="font-label-telemetry text-label-telemetry text-primary">4.2 ms</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm shadow-[0_0_16px_rgba(0,240,255,0.35)]"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-telemetry text-label-telemetry" data-path="perception-and-sensor-fusion" href="#"><span class="material-symbols-outlined text-[18px]">radar</span><span class="">Perception Fusion</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-telemetry text-label-telemetry" data-path="adaptive-safety-bubble" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span class="">Safety Bubble</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-telemetry text-label-telemetry" data-path="dynamic-path-generator" href="#"><span class="material-symbols-outlined text-[18px]">alt_route</span><span class="">Path Generator</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-telemetry text-label-telemetry" data-path="collision-and-risk-matrix" href="#"><span class="material-symbols-outlined text-[18px]">warning</span><span class="">Risk Matrix</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-telemetry text-label-telemetry" data-path="vehicle-controller-actuation" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span class="">Actuation Rails</span></a></nav></div><div class="px-space-md flex flex-col gap-space-sm"><div class="bg-surface-container-low/70 p-space-sm rounded-DEFAULT flex flex-col gap-space-xs"><div class="flex justify-between items-center"><span class="font-label-caps text-label-caps text-outline">ROAD SECTOR</span><span class="font-label-code text-label-code text-primary-fixed">IND-DEL-NH48</span></div><div class="flex justify-between items-center"><span class="font-label-caps text-label-caps text-outline">UNSTRUCTURED DENSITY</span><span class="font-label-code text-label-code text-tertiary-fixed-dim">CRITICAL (HIGH)</span></div></div><button class="w-full bg-primary-container hover:bg-primary-fixed text-on-primary-container font-headline-sm text-headline-sm uppercase py-space-sm px-space-md rounded-DEFAULT shadow-[0_0_16px_rgba(0,240,255,0.4)] transition-all font-bold">Launch Live Sim</button></div></aside><div class="pl-72"><main class="w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- PRIMARY TELEMETRY BANNER -->
+<div class="w-full bg-surface-container-lowest px-space-lg py-space-sm flex flex-wrap items-center justify-between gap-space-md shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary shadow-[0_0_10px_rgba(78,222,163,0.9)] animate-pulse"></span>
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">ADAPTIVE COLLISION ENGINE</span>
+</div>
+<span class="bg-surface-container-high px-space-xs py-space-2xs text-secondary font-label-code text-label-code rounded-DEFAULT uppercase">CAN 2.0B LOCKED</span>
+<span class="bg-surface-container-high px-space-xs py-space-2xs text-primary-fixed-dim font-label-code text-label-code rounded-DEFAULT uppercase">LATENCY: 11.8ms</span>
+<span class="hidden sm:inline-flex bg-surface-container-high px-space-xs py-space-2xs text-on-surface-variant font-label-code text-label-code rounded-DEFAULT uppercase">SEED: IND-URBAN-BETA.09</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center bg-surface-container-low px-space-sm py-space-xs rounded-DEFAULT gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant">TRAFFIC CHAOS FLUX</span>
+<span class="font-label-telemetry text-label-telemetry text-tertiary-fixed-dim font-bold">88.4 / 100</span>
+</div>
+<div class="flex items-center bg-surface-container-low px-space-sm py-space-xs rounded-DEFAULT gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant">SYSTEM SAFETY STATE</span>
+<span class="font-label-telemetry text-label-telemetry text-secondary font-bold">OPTIMAL // L4 ACTIVE</span>
+</div>
+</div>
+</div>
+<div class="p-space-lg flex flex-col gap-space-xl">
+<!-- SECTION 1: HERO HUD & PERCEPTION COCKPIT -->
+<div class="relative w-full rounded-xl overflow-hidden bg-surface-container-lowest shadow-2xl">
+<!-- Perception Feed Canvas Area -->
+<div class="relative w-full aspect-[21/9] min-h-[460px] max-h-[680px] overflow-hidden">
+<img alt="SafeDrive AI Real-time Perception Stream" class="w-full h-full object-cover object-center filter brightness-[0.92] contrast-[1.08]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj-AmHaqNtJ-c-5FHBLTzyWYsXjq_khla6F_v8Bdx5qFCvFEXY1Z6723ACHvqEkA1isq715RQ7df_azjWaZXZGr_usQqABIEz_bmwN9ow9ASzZqMmZiICs0enOj2KmNxL8zYZidUbEFuXOj2krp-s7ITb7he0wymf4XTmhsrxdvMo8bgAKtLTAu1HyQUmo-m8bU6_dzWjZ7gJxHq59PUja5BIU1X16nudK_nFVW13HLcMuJWQYakivHw">
+<!-- Sensor Scan Grid Micro-Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-surface-container-lowest/40 pointer-events-none"></div>
+<!-- TOP HUD RAIL (Inside Canvas) -->
+<div class="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+<!-- Sensor Hardware Telemetry Matrix -->
+<div class="pointer-events-auto bg-surface-container-lowest/85 backdrop-blur-xl p-space-sm rounded-lg flex items-center gap-space-md shadow-lg">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">videocam</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">8x HDR CAM</span>
+<span class="font-label-code text-label-code text-primary font-bold">360° @ 60FPS</span>
+</div>
+</div>
+<span class="w-px h-6 bg-surface-container-high"></span>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]">grain</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">4x FMCW LiDAR</span>
+<span class="font-label-code text-label-code text-primary font-bold">128-BEAM DUAL</span>
+</div>
+</div>
+<span class="w-px h-6 bg-surface-container-high"></span>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">sensors</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">6x 4D RADAR</span>
+<span class="font-label-code text-label-code text-secondary font-bold">300m RANGE</span>
+</div>
+</div>
+<span class="w-px h-6 bg-surface-container-high"></span>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[18px]">wifi_tethering</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">FUSION CONFIDENCE</span>
+<span class="font-label-telemetry text-label-telemetry text-secondary font-bold">99.84%</span>
+</div>
+</div>
+</div>
+<!-- Active Mode Indicator -->
+<div class="pointer-events-auto flex items-center gap-space-sm bg-surface-container-lowest/85 backdrop-blur-xl px-space-md py-space-xs rounded-lg shadow-lg">
+<div class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_rgba(0,240,255,1)]"></div>
+<span class="font-headline-sm text-headline-sm text-primary font-semibold tracking-wide">ELASTIC SAFETY BUBBLE: ENGAGED</span>
+</div>
+</div>
+<!-- INTERACTIVE RETICLE OVERLAYS ON UNSTRUCTURED ACTORS -->
+<!-- Bovine / Stray Cattle -->
+<div class="absolute top-[52%] left-[13%] pointer-events-auto group cursor-crosshair">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-space-xs py-space-2xs rounded shadow-[0_0_12px_rgba(255,185,95,0.4)] flex items-center gap-space-2xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim animate-ping"></span>
+<span class="font-label-code text-label-code text-tertiary-fixed-dim font-semibold">[BOVINE #08] STATIC // DWELL: 84%</span>
+</div>
+<div class="w-24 h-16 mt-1 bg-tertiary-fixed-dim/10 rounded-sm"></div>
+</div>
+<!-- Auto-rickshaw Target -->
+<div class="absolute top-[40%] left-[30%] pointer-events-auto group cursor-crosshair">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-space-xs py-space-2xs rounded shadow-[0_0_12px_rgba(0,240,255,0.4)] flex items-center gap-space-2xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span class="font-label-code text-label-code text-primary-container font-semibold">[RICKSHAW #34] V: 32 km/h | TTC: 3.4s</span>
+</div>
+<div class="w-28 h-32 mt-1 bg-primary-container/10 rounded-sm"></div>
+</div>
+<!-- Wrong-way Two-Wheeler -->
+<div class="absolute top-[36%] left-[44%] pointer-events-auto group cursor-crosshair">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-space-xs py-space-2xs rounded shadow-[0_0_14px_rgba(255,180,171,0.7)] flex items-center gap-space-2xs">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-code text-label-code text-error font-bold">[WRONG-WAY 2-WHEELER #12] CLOSING: +42 km/h</span>
+</div>
+<div class="w-16 h-24 mt-1 bg-error/15 rounded-sm"></div>
+</div>
+<!-- Pedestrian Cluster -->
+<div class="absolute top-[48%] right-[22%] pointer-events-auto group cursor-crosshair">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-space-xs py-space-2xs rounded shadow-[0_0_12px_rgba(0,240,255,0.4)] flex items-center gap-space-2xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
+<span class="font-label-code text-label-code text-primary-fixed font-semibold">[PEDESTRIAN #19] LATERAL OFFSET: 3.8m</span>
+</div>
+<div class="w-16 h-28 mt-1 bg-primary/10 rounded-sm"></div>
+</div>
+<!-- Road Surface Defect / Unmarked Pothole -->
+<div class="absolute bottom-[24%] left-[34%] pointer-events-auto group cursor-crosshair">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md px-space-xs py-space-2xs rounded shadow-[0_0_10px_rgba(255,185,95,0.6)] flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[13px]">report_problem</span>
+<span class="font-label-code text-label-code text-tertiary-fixed-dim font-bold">POTHOLE #02 [DEPTH: 14cm // AVOIDANCE MANDATE]</span>
+</div>
+<div class="w-32 h-8 mt-1 bg-tertiary-fixed-dim/20 rounded-full"></div>
+</div>
+<!-- BOTTOM HUD DOCK: EGO-VEHICLE ACTUATION STATUS -->
+<div class="absolute bottom-4 left-4 right-4 pointer-events-auto bg-surface-container-lowest/90 backdrop-blur-2xl p-space-md rounded-xl flex flex-wrap items-center justify-between gap-space-md shadow-2xl">
+<!-- Ego Telemetry -->
+<div class="flex items-center gap-space-lg">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">EGO SPEED</span>
+<div class="flex items-baseline gap-space-2xs">
+<span class="font-label-telemetry text-display-sm text-primary font-bold">38.4</span>
+<span class="font-label-code text-label-code text-on-surface-variant">KM/H</span>
+</div>
+</div>
+<div class="w-px h-8 bg-surface-container-high"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">TIME-TO-COLLISION (MIN)</span>
+<div class="flex items-baseline gap-space-2xs">
+<span class="font-label-telemetry text-display-sm text-secondary font-bold">2.84</span>
+<span class="font-label-code text-label-code text-secondary">SEC</span>
+</div>
+</div>
+<div class="w-px h-8 bg-surface-container-high"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">DRAC REQUIRED</span>
+<div class="flex items-baseline gap-space-2xs">
+<span class="font-label-telemetry text-display-sm text-primary-fixed-dim font-bold">1.42</span>
+<span class="font-label-code text-label-code text-on-surface-variant">m/s²</span>
+</div>
+</div>
+<div class="w-px h-8 bg-surface-container-high"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">ERRATIC BEHAVIOR INDEX</span>
+<div class="flex items-baseline gap-space-2xs">
+<span class="font-label-telemetry text-display-sm text-tertiary-fixed-dim font-bold">87</span>
+<span class="font-label-code text-label-code text-tertiary-fixed-dim">/ 100</span>
+</div>
+</div>
+</div>
+<!-- Trajectory Quick Action Selector -->
+<div class="flex items-center gap-space-sm">
+<div class="flex flex-col items-end">
+<span class="font-label-caps text-label-caps text-outline">ACTIVE TACTICAL SPLINE</span>
+<span class="font-label-code text-label-code text-secondary font-bold">SPLINE ALPHA [LEFT BYPASS]</span>
+</div>
+<button class="bg-primary-container hover:bg-primary-fixed text-on-primary-container px-space-md py-space-sm rounded-DEFAULT font-label-caps text-label-caps font-bold transition-all shadow-[0_0_14px_rgba(0,240,255,0.4)]">
+              RE-CALCULATE MESH
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: ADAPTIVE SAFETY BUBBLE vs RIGID BOX ARCHITECTURE -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left: Elastic Safety Envelope Visual Explainer (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container p-space-lg rounded-xl shadow-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-fixed text-[24px]">shield</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight">Adaptive Safety Bubble: Elastic Morphing Envelope</h2>
+</div>
+<span class="bg-surface-container-highest px-space-sm py-space-2xs text-secondary font-label-code text-label-code rounded-DEFAULT">Zero False Hard-Brakes</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-space-lg">Unlike Western autonomous vehicle rigid axis-aligned bounding boxes (which freeze continuously in Indian traffic), the SafeDrive AI Elastic Envelope dynamically pinches around predictable gaps and balloons laterally when passing unpredictable actors like weaving two-wheelers and cattle.</p>
+<!-- Morphing Envelope SVG Visualizer -->
+<div class="w-full bg-surface-container-lowest p-space-md rounded-lg mb-space-md relative overflow-hidden">
+<div class="flex items-center justify-between text-outline font-label-code text-label-code mb-space-xs">
+<span class="">LATERAL ELASTIC BUFFER: ±2.4m</span>
+<span class="">LONGITUDINAL BRAKING CONE: 32.8m @ 38 km/h</span>
+</div>
+<svg class="w-full h-44" viewBox="0 0 700 240">
+<!-- Grid background -->
+<defs>
+<pattern height="20" id="grid-pattern" patternUnits="userSpaceOnUse" width="20">
+<path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"></path>
+</pattern>
+<linearGradient id="bubble-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="rgba(0, 240, 255, 0.05)"></stop>
+<stop offset="50%" stop-color="rgba(78, 222, 163, 0.25)"></stop>
+<stop offset="100%" stop-color="rgba(0, 240, 255, 0.05)"></stop>
+</linearGradient>
+<linearGradient id="rigid-gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="rgba(239, 68, 68, 0.08)"></stop>
+<stop offset="100%" stop-color="rgba(239, 68, 68, 0.02)"></stop>
+</linearGradient>
+</defs>
+<rect fill="url(#grid-pattern)" height="100%" width="100%"></rect>
+<!-- Traditional Rigid Box (Ghost Red Failures) -->
+<rect fill="url(#rigid-gradient)" height="130" rx="4" stroke="rgba(255,180,171,0.3)" stroke-dasharray="4 4" stroke-width="1.5" width="260" x="220" y="55"></rect>
+<text class="font-label-code text-label-code" fill="#ffb4ab" x="230" y="75">Legacy AV Rigid Bounding Envelope [Grid Lock Threshold]</text>
+<!-- Dynamic Morphing Elastic Bubble Contour (Cyan / Lime) -->
+<path d="M 170 120 C 180 50, 310 40, 370 70 C 430 90, 520 85, 545 120 C 520 155, 430 150, 370 170 C 310 200, 180 190, 170 120 Z" fill="url(#bubble-gradient)" stroke="#00f0ff" stroke-width="2"></path>
+<!-- Actor Incursions (Two-Wheeler Cut-in) -->
+<circle cx="430" cy="65" fill="#ffb95f" r="7"></circle>
+<text class="font-label-code text-label-code font-bold" fill="#ffb95f" x="444" y="68">Cut-In Scooter (Asymmetric Bubble Pinch)</text>
+<line stroke="#ffb95f" stroke-dasharray="2 2" x1="430" x2="380" y1="65" y2="85"></line>
+<!-- Bovine Obstacle (Lateral Expansion) -->
+<circle cx="210" cy="185" fill="#ffb95f" r="9"></circle>
+<text class="font-label-code text-label-code font-bold" fill="#ffb95f" x="226" y="195">Cattle Standstill (Lateral Expansion +1.2m)</text>
+<!-- Ego AV Center Vehicle Model -->
+<g transform="translate(325, 105)">
+<rect fill="#1c2028" height="30" rx="3" stroke="#00dbe9" stroke-width="1.5" width="50" x="0" y="0"></rect>
+<circle cx="12" cy="15" fill="#00f0ff" r="4"></circle>
+<path d="M 50 15 L 75 15" marker-end="url(#arrow)" stroke="#4edea3" stroke-width="2"></path>
+<text class="font-label-caps text-label-caps font-bold" fill="#dbfcff" x="4" y="-5">EGO AV</text>
+</g>
+</svg>
+</div>
+</div>
+<!-- Comparative Metrics Bar -->
+<div class="grid grid-cols-3 gap-space-sm">
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">FALSE EMERGENCY STOPS</span>
+<span class="font-label-telemetry text-headline-sm text-secondary font-bold">0.02 / km</span>
+<span class="font-label-code text-label-code text-on-surface-variant">vs 14.8 / km (Rigid Stack)</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">CLEARANCE EFFICIENCY</span>
+<span class="font-label-telemetry text-headline-sm text-primary font-bold">96.4%</span>
+<span class="font-label-code text-label-code text-on-surface-variant">Continuous Flow Preserved</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">PASSING CONFIDENCE</span>
+<span class="font-label-telemetry text-headline-sm text-secondary font-bold">98.1%</span>
+<span class="font-label-code text-label-code text-on-surface-variant">Micro-gap Penetration</span>
+</div>
+</div>
+</div>
+<!-- Right: Real-time Costmap & Risk Matrix (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container p-space-lg rounded-xl shadow-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[24px]">grid_goldenratio</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight">Occupancy Costmap &amp; Risk Matrix</h2>
+</div>
+<span class="bg-surface-container-highest px-space-sm py-space-2xs text-primary font-label-code text-label-code rounded-DEFAULT">250Hz OCCUPANCY</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-space-md">
+            Synthesizing unpaved road shoulders, open drainage pits, and sudden actor direction flips into 3D dynamic probabilistic risk fields.
+          </p>
+<!-- Costmap SVG Visualization -->
+<div class="w-full bg-surface-container-lowest p-space-sm rounded-lg mb-space-md">
+<svg class="w-full h-40" viewBox="0 0 400 190">
+<!-- Graded heatmap regions -->
+<rect fill="#0f131c" height="170" rx="4" width="380" x="10" y="10"></rect>
+<!-- Unpaved Shoulder Risk (Left) -->
+<rect fill="rgba(255, 185, 95, 0.15)" height="170" width="60" x="10" y="10"></rect>
+<text class="font-label-caps text-label-caps" fill="#ffb95f" transform="rotate(-90 18,95)" x="18" y="95">DIRT SHOULDER</text>
+<!-- Pothole Hotspot -->
+<circle cx="160" cy="120" fill="rgba(255, 180, 171, 0.2)" r="28"></circle>
+<circle cx="160" cy="120" fill="rgba(239, 68, 68, 0.5)" r="14"></circle>
+<text class="font-label-code text-label-code" fill="#ffb4ab" x="125" y="158">CHASM SEV-3</text>
+<!-- Erratic Rickshaw Path Envelope -->
+<ellipse cx="250" cy="70" fill="rgba(255, 185, 95, 0.2)" rx="45" ry="25"></ellipse>
+<circle cx="250" cy="70" fill="#ffb95f" r="8"></circle>
+<text class="font-label-code text-label-code" fill="#ffddb8" x="210" y="40">SWERVING AUTO</text>
+<!-- Safe Navigation Corridor (Green channel) -->
+<path d="M 180 180 C 190 130, 210 100, 205 20" fill="none" opacity="0.25" stroke="#4edea3" stroke-linecap="round" stroke-width="24"></path>
+<path d="M 180 180 C 190 130, 210 100, 205 20" fill="none" stroke="#00f0ff" stroke-dasharray="4 2" stroke-width="2"></path>
+<text class="font-label-code text-label-code font-bold" fill="#4edea3" x="215" y="115">ACTIVE TUNNEL</text>
+</svg>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">ROAD SURFACE FRICTION (μ)</span>
+<span class="font-label-telemetry text-label-telemetry text-primary font-bold">0.68 [DRY DUSTY ASPHALT]</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">UNMARKETED EDGE CONFIDENCE</span>
+<span class="font-label-telemetry text-label-telemetry text-secondary font-bold">94.2% [EDGE DETECTED]</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">COLLISION PROBABILITY (5.0s HORIZON)</span>
+<span class="font-label-telemetry text-label-telemetry text-secondary font-bold">0.004 [PASS NOMINAL]</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 3: MULTI-TRAJECTORY ROLLOUT CANDIDATES & LIVE SCORING TABLE -->
+<div class="w-full bg-surface-container p-space-lg rounded-xl shadow-xl flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">alt_route</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight">Multi-Trajectory Rollout &amp; Candidate Optimization</h2>
+<p class="text-body-sm text-on-surface-variant">Quintic Polynomial Splines calculated across parallel compute threads every 10ms.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-xs rounded-full">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-telemetry text-label-telemetry text-on-surface">32 TRAJECTORIES SAMPLED // 1 WINNER</span>
+</div>
+</div>
+<!-- Path Selection Breakdown Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-outline font-label-caps text-label-caps">
+<th class="p-space-md">TRAJECTORY SPLINE</th>
+<th class="p-space-md">MANEUVER PROFILE</th>
+<th class="p-space-md">SPATIAL CLEARANCE</th>
+<th class="p-space-md">JERK / COMFORT INDEX</th>
+<th class="p-space-md">TRAFFIC HEADWAY</th>
+<th class="p-space-md">RISK PENALTY</th>
+<th class="p-space-md">COMPOSITE SCORE</th>
+<th class="p-space-md">CONTROLLER STATUS</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-body-md font-label-telemetry">
+<!-- Spline Alpha: Selected -->
+<tr class="bg-surface-container-high/40 hover:bg-surface-container-high transition-colors">
+<td class="p-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></span>
+<span class="font-bold text-primary">Spline Alpha (A-1)</span>
+</div>
+</td>
+<td class="p-space-md text-on-surface">Left Bypass with Micro-Pinch</td>
+<td class="p-space-md text-secondary font-bold">94 / 100</td>
+<td class="p-space-md text-on-surface">88 / 100</td>
+<td class="p-space-md text-on-surface">+18.4m</td>
+<td class="p-space-md text-secondary">-4.2</td>
+<td class="p-space-md">
+<span class="text-secondary font-bold text-headline-sm">91.2</span>
+</td>
+<td class="p-space-md">
+<span class="bg-secondary-container text-on-secondary-container px-space-sm py-space-2xs rounded font-label-caps text-label-caps font-bold">SELECTED &amp; ENGAGED</span>
+</td>
+</tr>
+<!-- Spline Beta: Rejected -->
+<tr class="bg-surface-container-lowest/30 hover:bg-surface-container-high transition-colors">
+<td class="p-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="font-bold text-on-surface-variant">Spline Beta (B-4)</span>
+</div>
+</td>
+<td class="p-space-md text-on-surface-variant">Aggressive Right Overtake</td>
+<td class="p-space-md text-error font-bold">48 / 100</td>
+<td class="p-space-md text-on-surface-variant">64 / 100</td>
+<td class="p-space-md text-error">+4.2m (Low)</td>
+<td class="p-space-md text-error">-38.6</td>
+<td class="p-space-md">
+<span class="text-error font-bold text-headline-sm">52.4</span>
+</td>
+<td class="p-space-md">
+<span class="bg-error-container text-on-error-container px-space-sm py-space-2xs rounded font-label-caps text-label-caps font-bold">REJECTED [TTC BREACH]</span>
+</td>
+</tr>
+<!-- Spline Gamma: Standby -->
+<tr class="bg-surface-container-lowest/30 hover:bg-surface-container-high transition-colors">
+<td class="p-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-bold text-on-surface-variant">Spline Gamma (G-2)</span>
+</div>
+</td>
+<td class="p-space-md text-on-surface-variant">Emergency In-Lane Stop</td>
+<td class="p-space-md text-tertiary-fixed-dim font-bold">78 / 100</td>
+<td class="p-space-md text-tertiary-fixed-dim">41 / 100 (Harsh)</td>
+<td class="p-space-md text-on-surface-variant">0.0m</td>
+<td class="p-space-md text-tertiary-fixed-dim">-18.0</td>
+<td class="p-space-md">
+<span class="text-tertiary-fixed-dim font-bold text-headline-sm">64.0</span>
+</td>
+<td class="p-space-md">
+<span class="bg-surface-container-highest text-on-surface-variant px-space-sm py-space-2xs rounded font-label-caps text-label-caps font-bold">STANDBY REDUNDANCY</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- SECTION 4: VEHICLE CONTROLLER & ACTUATION LAYER (CAN-BUS) + SIMULATION CONTROLS -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-lg">
+<!-- CAN-BUS Actuation Telemetry (8 cols) -->
+<div class="xl:col-span-8 bg-surface-container p-space-lg rounded-xl shadow-xl flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-fixed text-[24px]">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight">Vehicle Controller &amp; CAN-Bus Actuation Layer</h2>
+</div>
+<span class="bg-surface-container-high px-space-sm py-space-2xs text-secondary font-label-code text-label-code rounded-DEFAULT">STEER/DRIVE-BY-WIRE ACTIVE</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md mb-space-lg">
+<!-- Steering Angle -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">TARGET STEERING</span>
+<span class="font-label-telemetry text-display-sm text-primary font-bold my-space-xs">-4.2°</span>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[45%]"></div>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant mt-space-2xs">RATE: 18.5 deg/sec</span>
+</div>
+<!-- Throttle Output -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">THROTTLE ACTUATION</span>
+<span class="font-label-telemetry text-display-sm text-secondary font-bold my-space-xs">28.0%</span>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[28%]"></div>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant mt-space-2xs">TORQUE: 180 Nm</span>
+</div>
+<!-- Brake Pre-Fill -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">BRAKE PRE-FILL</span>
+<span class="font-label-telemetry text-display-sm text-tertiary-fixed-dim font-bold my-space-xs">STANDBY</span>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-fixed-dim h-full w-[15%]"></div>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant mt-space-2xs">LINE PRESS: 4.8 BAR</span>
+</div>
+<!-- Lateral Accel -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">LATERAL ACCELERATION</span>
+<span class="font-label-telemetry text-display-sm text-primary-fixed font-bold my-space-xs">0.18g</span>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-fixed h-full w-[35%]"></div>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant mt-space-2xs">LIMIT: &lt; 0.35g COMFORT</span>
+</div>
+</div>
+<!-- Real-time Sparkline Controller Drift Tracker -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex justify-between items-center text-outline font-label-code text-label-code">
+<span class="">TRAJECTORY TRACKING CROSS-TRACK ERROR (XTE)</span>
+<span class="text-secondary font-bold">XTE: 0.042m [ALLOWABLE: ±0.15m]</span>
+</div>
+<svg class="w-full h-12" viewBox="0 0 600 48">
+<path d="M 0 24 Q 50 20, 100 24 T 200 22 T 300 26 T 400 24 T 500 21 T 600 24" fill="none" stroke="#31353e" stroke-width="1"></path>
+<path d="M 0 24 Q 45 28, 90 22 T 180 25 T 270 21 T 360 26 T 450 23 T 540 24 L 600 24" fill="none" stroke="#00f0ff" stroke-width="2"></path>
+<circle class="animate-ping" cx="600" cy="24" fill="#00f0ff" r="3"></circle>
+</svg>
+</div>
+</div>
+<!-- Live Simulation Scenarios & Weather Injection Controller (4 cols) -->
+<div class="xl:col-span-4 bg-surface-container p-space-lg rounded-xl shadow-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">thermostat</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight">Scenario &amp; Sensor Sim</h2>
+</div>
+<span class="bg-surface-container-highest px-space-sm py-space-2xs text-tertiary-fixed-dim font-label-code text-label-code rounded-DEFAULT">LIVE INJECTION</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-space-md">
+            Test safety envelope algorithms under severe Indian environmental degraded perception regimes:
+          </p>
+<!-- Weather Injection Toggles -->
+<div class="flex flex-col gap-space-xs mb-space-md">
+<label class="font-label-caps text-label-caps text-outline">ENVIRONMENTAL WEATHER CONDITION</label>
+<div class="grid grid-cols-3 gap-space-xs">
+<button class="bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface py-space-xs px-space-sm rounded font-label-code text-label-code font-bold transition-all text-center">
+                DUSK GLARE
+              </button>
+<button class="bg-primary-container text-on-primary-container py-space-xs px-space-sm rounded font-label-code text-label-code font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)] text-center">
+                HEAVY SMOG
+              </button>
+<button class="bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface py-space-xs px-space-sm rounded font-label-code text-label-code font-bold transition-all text-center">
+                MONSOON
+              </button>
+</div>
+</div>
+<!-- Road Condition Toggles -->
+<div class="flex flex-col gap-space-xs mb-space-md">
+<label class="font-label-caps text-label-caps text-outline">UNSTRUCTURED ROAD SECTOR REGIME</label>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-DEFAULT cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex flex-col">
+<span class="font-label-telemetry text-label-telemetry text-on-surface font-semibold">NH44 Diversion Construction</span>
+<span class="font-label-code text-label-code text-outline">Loose gravel, broken barricades</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]">radio_button_checked</span>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded-DEFAULT cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex flex-col">
+<span class="font-label-telemetry text-label-telemetry text-on-surface font-semibold">Old Delhi Dense Bazaar</span>
+<span class="font-label-code text-label-code text-outline">Pedestrian density &gt; 120/100m²</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px]">radio_button_unchecked</span>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded-DEFAULT cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex flex-col">
+<span class="font-label-telemetry text-label-telemetry text-on-surface font-semibold">Outer Ring Road Bangalore</span>
+<span class="font-label-code text-label-code text-outline">Unmarked lane merges, high speed 2W</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px]">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full bg-surface-container-highest hover:bg-error-container hover:text-on-error-container text-on-surface font-label-caps text-label-caps py-space-sm px-space-md rounded uppercase tracking-wider transition-all">
+          Trigger Chaotic Edge-Case Injection
+        </button>
+</div>
+</div>
+</div>
+</div></main></div>
+
+</body></html>
