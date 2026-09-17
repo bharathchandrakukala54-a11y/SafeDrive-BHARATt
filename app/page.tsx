@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Header } from "@/components/Header";
 import { Sidebar } from "@/components/Sidebar";
 import { TelemetryBanner } from "@/components/TelemetryBanner";
@@ -11,6 +11,7 @@ import { TrajectoryRollout, SplineCandidate } from "@/components/TrajectoryRollo
 import { ActuationController } from "@/components/ActuationController";
 import { ScenarioSim } from "@/components/ScenarioSim";
 import { EmergencyOverrideModal } from "@/components/EmergencyOverrideModal";
+import { useSupabaseTelemetry } from "@/hooks/useSupabaseTelemetry";
 
 const INITIAL_CANDIDATES: SplineCandidate[] = [
   {
@@ -110,6 +111,20 @@ export default function Home() {
   const [isOverrideActive, setIsOverrideActive] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
+  // ── Supabase Integration ────────────────────────────────────────────────
+  const telemetrySnapshot = useMemo(
+    () => ({
+      speed_kmph: egoSpeed,
+      steering_angle_deg: steeringAngle,
+      brake_applied: brakeStatus !== "STANDBY",
+    }),
+    [egoSpeed, steeringAngle, brakeStatus]
+  );
+  const { dbStatus, lastPersistedAt, flushNow } = useSupabaseTelemetry(
+    telemetrySnapshot,
+    isSimRunning
+  );
+
   // Dynamic Telemetry Loop
   useEffect(() => {
     if (!isSimRunning) return;
@@ -151,6 +166,8 @@ export default function Home() {
       setThreatLevel(12);
       setSafetyState("OPTIMAL // L4 ACTIVE");
       setBrakeStatus("STANDBY");
+      // Persist recalculated state immediately
+      flushNow();
     }, 600);
   };
 
@@ -200,6 +217,9 @@ export default function Home() {
     );
     setSelectedSplineId("spline-gamma");
     setActiveSpline("SPLINE GAMMA [EMERGENCY EVASION]");
+
+    // Persist chaos state immediately
+    flushNow();
 
     // Auto-normalize after 6 seconds
     setTimeout(() => {
@@ -254,6 +274,8 @@ export default function Home() {
             chaosFlux={chaosFlux}
             safetyState={safetyState}
             latencyMs={latencyMs}
+            dbStatus={dbStatus}
+            lastPersistedAt={lastPersistedAt}
           />
 
           {/* Core HUD Content Array */}

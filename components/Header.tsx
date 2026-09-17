@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { User, AlertTriangle, Activity, Wifi, ShieldAlert, Menu, X } from "lucide-react";
+import { User, AlertTriangle, Activity, Wifi, ShieldAlert, Menu, X, LogOut } from "lucide-react";
+import { signout } from "@/app/login/actions";
 
 interface HeaderProps {
   activeTab: string;
@@ -161,6 +162,14 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <User className="w-4 h-4" />
           </div>
+
+          <button
+            onClick={() => signout()}
+            title="Disconnect Access"
+            className="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-on-surface hover:text-error hover:border-error/50 transition-colors cursor-pointer"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </header>
