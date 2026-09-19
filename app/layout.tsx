@@ -44,12 +44,6 @@ export default function RootLayout({
       lang="en"
       className={`dark ${spaceGrotesk.variable} ${geistSans.variable} ${jetbrainsMono.variable}`}
     >
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-      </head>
       <body className="bg-background text-on-surface font-sans antialiased min-h-screen selection:bg-primary-container selection:text-surface-container-lowest">
         {children}
       </body>

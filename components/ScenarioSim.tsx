@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   Circle,
 } from "lucide-react";
+import type { SplineCandidate } from "@/types/trajectory";
 
 interface ScenarioSimProps {
   weather: string;
@@ -19,6 +20,7 @@ interface ScenarioSimProps {
   setSelectedSector: (s: string) => void;
   onTriggerChaos: () => void;
   isChaosActive: boolean;
+  candidates?: SplineCandidate[];
 }
 
 export const ScenarioSim: React.FC<ScenarioSimProps> = ({

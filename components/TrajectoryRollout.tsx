@@ -1,23 +1,10 @@
 "use client";
 
 import React from "react";
-import { GitBranch, Check, X, ShieldAlert, Cpu } from "lucide-react";
+import { GitBranch, Check, X, ShieldAlert } from "lucide-react";
+import { SplineCandidate } from "@/types/trajectory";
 
-export interface SplineCandidate {
-  id: string;
-  name: string;
-  maneuver: string;
-  clearance: string;
-  clearanceScore: number;
-  jerkComfort: string;
-  jerkScore: number;
-  headway: string;
-  riskPenalty: string;
-  compositeScore: number;
-  status: "ENGAGED" | "REJECTED" | "STANDBY";
-  statusReason?: string;
-  color: "secondary" | "error" | "tertiary";
-}
+export type { SplineCandidate };
 
 interface TrajectoryRolloutProps {
   candidates: SplineCandidate[];
@@ -119,21 +106,21 @@ export const TrajectoryRollout: React.FC<TrajectoryRolloutProps> = ({
                         : "text-error"
                     }`}
                   >
-                    {candidate.clearance}
+                    {candidate.clearance ?? `${candidate.clearanceScore} / 100`}
                   </td>
 
                   <td className="p-3 text-on-surface-variant">
-                    {candidate.jerkComfort}
+                    {candidate.jerkComfort ?? `${candidate.jerkComfortScore} / 100`}
                   </td>
 
                   <td
                     className={`p-3 ${
-                      candidate.headway.includes("Low")
+                      (candidate.headwayDisplay ?? String(candidate.headway)).includes("Low")
                         ? "text-error font-bold"
                         : "text-on-surface"
                     }`}
                   >
-                    {candidate.headway}
+                    {candidate.headwayDisplay ?? `+${candidate.headway}m`}
                   </td>
 
                   <td
@@ -145,7 +132,9 @@ export const TrajectoryRollout: React.FC<TrajectoryRolloutProps> = ({
                         : "text-tertiary-fixed-dim"
                     }`}
                   >
-                    {candidate.riskPenalty}
+                    {typeof candidate.riskPenalty === "number"
+                      ? (candidate.riskPenalty > 0 ? `+${candidate.riskPenalty.toFixed(1)}` : candidate.riskPenalty.toFixed(1))
+                      : candidate.riskPenalty}
                   </td>
 
                   <td className="p-3">

@@ -11,7 +11,6 @@ import {
   Pause,
   MapPin,
   Cpu,
-  Layers,
 } from "lucide-react";
 
 interface SidebarProps {

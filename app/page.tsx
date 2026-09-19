@@ -7,13 +7,15 @@ import { TelemetryBanner } from "@/components/TelemetryBanner";
 import { PerceptionHUD } from "@/components/PerceptionHUD";
 import { AdaptiveSafetyBubble } from "@/components/AdaptiveSafetyBubble";
 import { OccupancyCostmap } from "@/components/OccupancyCostmap";
-import { TrajectoryRollout, SplineCandidate } from "@/components/TrajectoryRollout";
+import { TrajectoryRollout } from "@/components/TrajectoryRollout";
 import { ActuationController } from "@/components/ActuationController";
 import { ScenarioSim } from "@/components/ScenarioSim";
 import { EmergencyOverrideModal } from "@/components/EmergencyOverrideModal";
 import { useSupabaseTelemetry } from "@/hooks/useSupabaseTelemetry";
+import { SplineCandidate } from "@/types/trajectory";
+import { computeCompositeScore, deriveCandidateStatuses } from "@/lib/scoring";
 
-const INITIAL_CANDIDATES: SplineCandidate[] = [
+const RAW_CANDIDATES: Omit<SplineCandidate, "compositeScore" | "status" | "statusReason">[] = [
   {
     id: "spline-alpha",
     name: "Spline Alpha (A-1)",
@@ -21,12 +23,11 @@ const INITIAL_CANDIDATES: SplineCandidate[] = [
     clearance: "94 / 100",
     clearanceScore: 94,
     jerkComfort: "88 / 100",
+    jerkComfortScore: 88,
     jerkScore: 88,
-    headway: "+18.4m",
-    riskPenalty: "-4.2",
-    compositeScore: 91.2,
-    status: "ENGAGED",
-    statusReason: "SELECTED & ENGAGED",
+    headway: 18.4,
+    headwayDisplay: "+18.4m",
+    riskPenalty: -4.2,
     color: "secondary",
   },
   {
@@ -36,12 +37,11 @@ const INITIAL_CANDIDATES: SplineCandidate[] = [
     clearance: "48 / 100",
     clearanceScore: 48,
     jerkComfort: "64 / 100",
+    jerkComfortScore: 64,
     jerkScore: 64,
-    headway: "+4.2m (Low)",
-    riskPenalty: "-38.6",
-    compositeScore: 52.4,
-    status: "REJECTED",
-    statusReason: "REJECTED [TTC BREACH]",
+    headway: 4.2,
+    headwayDisplay: "+4.2m (Low)",
+    riskPenalty: -38.6,
     color: "error",
   },
   {
@@ -51,12 +51,11 @@ const INITIAL_CANDIDATES: SplineCandidate[] = [
     clearance: "78 / 100",
     clearanceScore: 78,
     jerkComfort: "41 / 100 (Harsh)",
+    jerkComfortScore: 41,
     jerkScore: 41,
-    headway: "0.0m",
-    riskPenalty: "-18.0",
-    compositeScore: 64.0,
-    status: "STANDBY",
-    statusReason: "STANDBY REDUNDANCY",
+    headway: 0.0,
+    headwayDisplay: "0.0m",
+    riskPenalty: -18.0,
     color: "tertiary",
   },
   {
@@ -66,15 +65,23 @@ const INITIAL_CANDIDATES: SplineCandidate[] = [
     clearance: "82 / 100",
     clearanceScore: 82,
     jerkComfort: "79 / 100",
+    jerkComfortScore: 79,
     jerkScore: 79,
-    headway: "+12.0m",
-    riskPenalty: "-9.4",
-    compositeScore: 81.6,
-    status: "STANDBY",
-    statusReason: "STANDBY ALTERNATE",
+    headway: 12.0,
+    headwayDisplay: "+12.0m",
+    riskPenalty: -9.4,
     color: "secondary",
   },
 ];
+
+const INITIAL_CANDIDATES: SplineCandidate[] = deriveCandidateStatuses(
+  RAW_CANDIDATES.map((cand) => ({
+    ...cand,
+    compositeScore: computeCompositeScore(cand),
+    status: "STANDBY" as const,
+    statusReason: "STANDBY",
+  }))
+);
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<string>("perception");
@@ -88,7 +95,7 @@ export default function Home() {
   const [egoSpeed, setEgoSpeed] = useState<number>(38.4);
   const [ttcSeconds, setTtcSeconds] = useState<number>(2.84);
   const [dracValue, setDracValue] = useState<number>(1.42);
-  const [erraticIndex, setErraticIndex] = useState<number>(87);
+  const [erraticIndex] = useState<number>(87);
   const [steeringAngle, setSteeringAngle] = useState<number>(-4.2);
   const [throttlePercent, setThrottlePercent] = useState<number>(28.0);
   const [lateralG, setLateralG] = useState<number>(0.18);
@@ -137,10 +144,10 @@ export default function Home() {
         return +(Math.max(1.8, Math.min(3.8, next))).toFixed(2);
       });
       setLatencyMs(+(11.8 + (Math.random() - 0.5) * 0.8).toFixed(1));
-      setSteeringAngle((prev) => +(-4.2 + (Math.random() - 0.5) * 0.4).toFixed(1));
-      setThrottlePercent((prev) => +(28.0 + (Math.random() - 0.5) * 1.5).toFixed(1));
-      setLateralG((prev) => +(0.18 + (Math.random() - 0.5) * 0.02).toFixed(2));
-      setXteMeters((prev) => +(0.042 + (Math.random() - 0.5) * 0.006).toFixed(3));
+      setSteeringAngle(+(-4.2 + (Math.random() - 0.5) * 0.4).toFixed(1));
+      setThrottlePercent(+(28.0 + (Math.random() - 0.5) * 1.5).toFixed(1));
+      setLateralG(+(0.18 + (Math.random() - 0.5) * 0.02).toFixed(2));
+      setXteMeters(+(0.042 + (Math.random() - 0.5) * 0.006).toFixed(3));
     }, 400);
 
     return () => clearInterval(interval);

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { AlertTriangle, ShieldOff, CheckCircle2, RotateCcw, Radio } from "lucide-react";
+import { AlertTriangle, ShieldOff, RotateCcw } from "lucide-react";
 
 interface EmergencyOverrideModalProps {
   isOpen: boolean;

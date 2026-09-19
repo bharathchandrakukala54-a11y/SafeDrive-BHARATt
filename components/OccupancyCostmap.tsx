@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Grid, AlertTriangle, Route, Compass, CheckCircle } from "lucide-react";
+import { Grid, Compass } from "lucide-react";
 
 export const OccupancyCostmap: React.FC = () => {
   const [selectedZone, setSelectedZone] = useState<string | null>(null);

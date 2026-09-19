@@ -2,18 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import {
-  Video,
-  Layers,
-  Crosshair,
-  AlertOctagon,
-  Eye,
-  RefreshCw,
-  Zap,
-  Activity,
-  Maximize2,
-  SlidersHorizontal,
-} from "lucide-react";
+import { Crosshair, RefreshCw } from "lucide-react";
 
 interface Actor {
   id: string;
@@ -138,7 +127,7 @@ export const PerceptionHUD: React.FC<PerceptionHUDProps> = ({
   const [activeLayer, setActiveLayer] = useState<
     "all" | "vision" | "lidar" | "radar" | "segmentation"
   >("all");
-  const [showScanlines, setShowScanlines] = useState(true);
+  const [showScanlines] = useState(true);
 
   return (
     <div className="relative w-full rounded-2xl overflow-hidden bg-surface-container-lowest border border-surface-container-high/90 shadow-[0_8px_32px_rgba(0,0,0,0.8)] flex flex-col">

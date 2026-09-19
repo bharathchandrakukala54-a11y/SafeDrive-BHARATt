@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Sliders, Cpu, Activity, Gauge, Disc } from "lucide-react";
+import { Sliders, Cpu, Activity } from "lucide-react";
+import type { SplineCandidate } from "@/types/trajectory";
 
 interface ActuationControllerProps {
   steeringAngle: number;
@@ -9,6 +10,7 @@ interface ActuationControllerProps {
   brakeStatus: string;
   lateralG: number;
   xteMeters: number;
+  activeCandidate?: SplineCandidate;
 }
 
 export const ActuationController: React.FC<ActuationControllerProps> = ({

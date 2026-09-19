@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { User, AlertTriangle, Activity, Wifi, ShieldAlert, Menu, X, LogOut } from "lucide-react";
+import { User, AlertTriangle, Wifi, ShieldAlert, Menu, X, LogOut } from "lucide-react";
 import { signout } from "@/app/login/actions";
 
 interface HeaderProps {

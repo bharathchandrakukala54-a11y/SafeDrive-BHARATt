@@ -1,10 +1,53 @@
 import { supabase } from "./supabase";
-import { Database } from "@/types/supabase";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type TelemetryInsert = any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type TelemetryRow = any;
+export interface TelemetryInsert {
+  vehicle_id?: string;
+  speed_kmph?: number;
+  steering_angle_deg?: number;
+  brake_applied?: boolean;
+  latitude?: number;
+  longitude?: number;
+  recorded_at?: string;
+  [key: string]: unknown;
+}
+
+export interface TelemetryRow {
+  id: string;
+  vehicle_id: string;
+  recorded_at: string;
+  speed_kmph: number | null;
+  steering_angle_deg: number | null;
+  brake_applied: boolean | null;
+  latitude: number | null;
+  longitude: number | null;
+  [key: string]: unknown;
+}
+
+interface DynamicQueryResult<T> {
+  data: T;
+  error: { message: string } | null;
+}
+
+interface DynamicQueryChain<T> {
+  select: (columns?: string) => DynamicQueryChain<T>;
+  order: (column: string, options?: { ascending: boolean }) => DynamicQueryChain<T>;
+  limit: (count: number) => Promise<DynamicQueryResult<T[]>>;
+  single: () => Promise<DynamicQueryResult<T>>;
+}
+
+interface DynamicTableClient {
+  upsert: (values: Record<string, unknown>) => DynamicQueryChain<{ id: string }>;
+  insert: (values: Record<string, unknown>) => DynamicQueryChain<TelemetryRow>;
+  select: (columns?: string) => {
+    order: (column: string, options?: { ascending: boolean }) => {
+      limit: (count: number) => Promise<DynamicQueryResult<TelemetryRow[]>>;
+    };
+  };
+}
+
+interface DynamicSupabaseClient {
+  from: (table: string) => DynamicTableClient;
+}
 
 const DEFAULT_TEST_VEHICLE_ID = "00000000-0000-0000-0000-000000000001";
 
@@ -23,7 +66,8 @@ export async function ensureTestVehicleExists(vehicleId = DEFAULT_TEST_VEHICLE_I
     return existing.id;
   }
 
-  const { data: created, error } = await (supabase as any)
+  const client = supabase as unknown as DynamicSupabaseClient;
+  const { data: created, error } = await client
     .from("vehicles")
     .upsert({
       id: vehicleId,
@@ -52,7 +96,7 @@ export async function insertTestTelemetryRow(overrides?: Partial<TelemetryInsert
   // Ensure we have a valid vehicle ID
   const vehicleId = overrides?.vehicle_id || (await ensureTestVehicleExists());
 
-  const payload: TelemetryInsert = {
+  const payload: Record<string, unknown> = {
     vehicle_id: vehicleId,
     speed_kmph: overrides?.speed_kmph ?? 42.5,
     steering_angle_deg: overrides?.steering_angle_deg ?? -2.8,
@@ -63,7 +107,8 @@ export async function insertTestTelemetryRow(overrides?: Partial<TelemetryInsert
     ...overrides,
   };
 
-  const { data, error } = await (supabase as any)
+  const client = supabase as unknown as DynamicSupabaseClient;
+  const { data, error } = await client
     .from("vehicle_telemetry")
     .insert(payload)
     .select()
@@ -71,7 +116,7 @@ export async function insertTestTelemetryRow(overrides?: Partial<TelemetryInsert
 
   if (error) {
     console.error("Error inserting telemetry row:", error);
-    throw error;
+    throw new Error(error.message);
   }
 
   return data;
@@ -81,7 +126,8 @@ export async function insertTestTelemetryRow(overrides?: Partial<TelemetryInsert
  * Fetch the latest telemetry records
  */
 export async function fetchLatestTelemetry(limit = 10): Promise<TelemetryRow[]> {
-  const { data, error } = await (supabase as any)
+  const client = supabase as unknown as DynamicSupabaseClient;
+  const { data, error } = await client
     .from("vehicle_telemetry")
     .select("*")
     .order("recorded_at", { ascending: false })
@@ -89,7 +135,7 @@ export async function fetchLatestTelemetry(limit = 10): Promise<TelemetryRow[]> 
 
   if (error) {
     console.error("Error fetching telemetry rows:", error);
-    throw error;
+    throw new Error(error.message);
   }
 
   return data || [];

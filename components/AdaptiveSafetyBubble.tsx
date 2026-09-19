@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Shield, Sparkles, Sliders, CheckCircle2, AlertTriangle } from "lucide-react";
+import { Shield, CheckCircle2 } from "lucide-react";
 
 export const AdaptiveSafetyBubble: React.FC = () => {
   const [pinchFactor, setPinchFactor] = useState<number>(35); // 0 - 100
   const [cattleClearance, setCattleClearance] = useState<number>(50); // 0 - 100
-  const [showRigidBox, setShowRigidBox] = useState<boolean>(true);
+  const [showRigidBox] = useState<boolean>(true);
 
   // Dynamic SVG path calculations based on pinch and clearance sliders
   const pinchY = 70 + (pinchFactor / 100) * 30; // 70 -> 100
