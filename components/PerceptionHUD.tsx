@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import { Crosshair, RefreshCw } from "lucide-react";
+import { CameraFeed } from "@/components/CameraFeed";
+import type { DetectedObject } from "@/types/detection";
+import { groupByLabel } from "@/types/detection";
 
 interface Actor {
   id: string;
@@ -112,6 +115,8 @@ interface PerceptionHUDProps {
   activeSpline: string;
   onRecalculate: () => void;
   isRecalculating: boolean;
+  detectedObjects?: DetectedObject[];
+  onDetect?: (objects: DetectedObject[]) => void;
 }
 
 export const PerceptionHUD: React.FC<PerceptionHUDProps> = ({
@@ -122,36 +127,58 @@ export const PerceptionHUD: React.FC<PerceptionHUDProps> = ({
   activeSpline,
   onRecalculate,
   isRecalculating,
+  detectedObjects = [],
+  onDetect,
 }) => {
   const [selectedActor, setSelectedActor] = useState<Actor | null>(null);
   const [activeLayer, setActiveLayer] = useState<
-    "all" | "vision" | "lidar" | "radar" | "segmentation"
+    "all" | "vision" | "lidar" | "radar" | "segmentation" | "camera"
   >("all");
   const [showScanlines] = useState(true);
+
+  const handleDetect = useCallback(
+    (objs: DetectedObject[]) => onDetect?.(objs),
+    [onDetect]
+  );
+
+  const isCameraMode = activeLayer === "camera";
+  const detectionGroups = groupByLabel(detectedObjects);
 
   return (
     <div className="relative w-full rounded-2xl overflow-hidden bg-surface-container-lowest border border-surface-container-high/90 shadow-[0_8px_32px_rgba(0,0,0,0.8)] flex flex-col">
       {/* Perception Viewport Container */}
       <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] min-h-[460px] max-h-[640px] overflow-hidden select-none bg-surface-container-lowest">
-        {/* Background Perception Media */}
-        <Image
-          src="/lidar_city.webp"
-          alt="SafeDrive AI Real-time Perception Stream"
-          fill
-          priority
-          className={`object-cover object-center filter brightness-[0.88] contrast-[1.12] transition-all duration-500 ${
-            activeLayer === "lidar"
-              ? "hue-rotate-90 saturate-200"
-              : activeLayer === "radar"
-              ? "invert opacity-70"
-              : activeLayer === "segmentation"
-              ? "saturate-150 contrast-125"
-              : ""
-          }`}
-        />
+        {/* Background Perception Media (hidden when camera mode is active) */}
+        {!isCameraMode && (
+          <Image
+            src="/lidar_city.webp"
+            alt="SafeDrive AI Real-time Perception Stream"
+            fill
+            priority
+            className={`object-cover object-center filter brightness-[0.88] contrast-[1.12] transition-all duration-500 ${
+              activeLayer === "lidar"
+                ? "hue-rotate-90 saturate-200"
+                : activeLayer === "radar"
+                ? "invert opacity-70"
+                : activeLayer === "segmentation"
+                ? "saturate-150 contrast-125"
+                : ""
+            }`}
+          />
+        )}
+
+        {/* Live Camera Feed (COCO-SSD) */}
+        {isCameraMode && (
+          <div className="absolute inset-0">
+            <CameraFeed
+              onDetect={handleDetect}
+              enabled={isCameraMode}
+            />
+          </div>
+        )}
 
         {/* Cybernetic Scanline & Grid Micro-Overlay */}
-        {showScanlines && (
+        {showScanlines && !isCameraMode && (
           <div className="absolute inset-0 scanline-grid opacity-30 pointer-events-none" />
         )}
 
@@ -235,23 +262,39 @@ export const PerceptionHUD: React.FC<PerceptionHUDProps> = ({
             </div>
 
             {/* Layer Filter Selector */}
-            <div className="bg-surface-container-lowest/90 backdrop-blur-xl px-1.5 py-1 rounded-lg border border-surface-container-high flex items-center gap-1">
-              {(["all", "vision", "lidar", "radar", "segmentation"] as const).map(
+            <div className="bg-surface-container-lowest/90 backdrop-blur-xl px-1.5 py-1 rounded-lg border border-surface-container-high flex items-center gap-1 flex-wrap">
+              {(["all", "vision", "lidar", "radar", "segmentation", "camera"] as const).map(
                 (layer) => (
                   <button
                     key={layer}
                     onClick={() => setActiveLayer(layer)}
                     className={`px-2 py-0.5 font-label-caps text-[9px] rounded uppercase cursor-pointer transition-all ${
                       activeLayer === layer
-                        ? "bg-primary-container text-on-primary-container font-bold shadow-[0_0_8px_rgba(0,240,255,0.4)]"
+                        ? layer === "camera"
+                          ? "bg-error/20 text-error font-bold border border-error/40 shadow-[0_0_8px_rgba(239,68,68,0.3)]"
+                          : "bg-primary-container text-on-primary-container font-bold shadow-[0_0_8px_rgba(0,240,255,0.4)]"
+                        : layer === "camera"
+                        ? "text-error/70 hover:text-error hover:bg-error/10 border border-transparent"
                         : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high"
                     }`}
                   >
-                    {layer}
+                    {layer === "camera" ? "📷 CAM" : layer}
                   </button>
                 )
               )}
             </div>
+
+            {/* Live detection count chip */}
+            {detectedObjects.length > 0 && (
+              <div className="flex items-center gap-1 bg-secondary/10 border border-secondary/30 px-2 py-0.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+                <span className="font-mono text-[9px] text-secondary font-bold">
+                  {Object.entries(detectionGroups)
+                    .map(([lbl, n]) => `${n} ${lbl}`)
+                    .join(", ")}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 

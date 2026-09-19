@@ -2,9 +2,17 @@
 
 import React, { useState } from "react";
 import { Grid, Compass } from "lucide-react";
+import type { DetectedObject } from "@/types/detection";
+import { groupByLabel } from "@/types/detection";
 
-export const OccupancyCostmap: React.FC = () => {
+interface OccupancyCostmapProps {
+  detectedObjects?: DetectedObject[];
+}
+
+export const OccupancyCostmap: React.FC<OccupancyCostmapProps> = ({ detectedObjects = [] }) => {
   const [selectedZone, setSelectedZone] = useState<string | null>(null);
+  const groups = groupByLabel(detectedObjects);
+  const totalDetections = detectedObjects.length;
 
   return (
     <div className="bg-surface-container border border-surface-container-high/80 p-5 lg:p-6 rounded-2xl shadow-xl flex flex-col justify-between">
@@ -163,6 +171,16 @@ export const OccupancyCostmap: React.FC = () => {
             0.004 [PASS NOMINAL]
           </span>
         </div>
+        {totalDetections > 0 && (
+          <div className="flex items-center justify-between mt-1 pt-1 border-t border-surface-container-high/50">
+            <span className="font-label-caps text-[10px] text-outline">
+              LIVE CAMERA DETECTIONS
+            </span>
+            <span className="font-mono text-xs text-secondary font-bold">
+              {totalDetections} OBJECTS [{Object.entries(groups).map(([l, c]) => `${c} ${l.toUpperCase()}`).join(", ")}]
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

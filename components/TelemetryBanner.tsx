@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, Flame, Radio, Database } from "lucide-react";
+import { ShieldCheck, Flame, Radio, Database, Eye } from "lucide-react";
 import type { DbStatus } from "@/hooks/useSupabaseTelemetry";
+import type { DetectedObject } from "@/types/detection";
+import { formatDetectionSummary } from "@/types/detection";
 
 interface TelemetryBannerProps {
   chaosFlux: number;
@@ -10,6 +12,7 @@ interface TelemetryBannerProps {
   latencyMs: number;
   dbStatus?: DbStatus;
   lastPersistedAt?: Date | null;
+  detectedObjects?: DetectedObject[];
 }
 
 const DB_STATUS_CONFIG: Record<
@@ -46,8 +49,10 @@ export const TelemetryBanner: React.FC<TelemetryBannerProps> = ({
   latencyMs,
   dbStatus,
   lastPersistedAt,
+  detectedObjects = [],
 }) => {
   const dbCfg = dbStatus ? DB_STATUS_CONFIG[dbStatus] : null;
+  const hasDetections = detectedObjects.length > 0;
 
   return (
     <div className="w-full bg-surface-container-lowest border-b border-surface-container-high/80 px-4 lg:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 shadow-md">
@@ -87,6 +92,17 @@ export const TelemetryBanner: React.FC<TelemetryBannerProps> = ({
                 })}
               </span>
             )}
+          </span>
+        )}
+
+        {/* Live detection count badge */}
+        {hasDetections && (
+          <span className="inline-flex items-center gap-1.5 bg-secondary/10 border border-secondary/30 px-2 py-0.5 font-mono text-[10px] rounded-full uppercase">
+            <Eye className="w-3 h-3 text-secondary" />
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse flex-shrink-0" />
+            <span className="text-secondary font-bold">
+              {formatDetectionSummary(detectedObjects)}
+            </span>
           </span>
         )}
       </div>

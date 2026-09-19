@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Header } from "@/components/Header";
 import { Sidebar } from "@/components/Sidebar";
 import { TelemetryBanner } from "@/components/TelemetryBanner";
@@ -14,6 +14,7 @@ import { EmergencyOverrideModal } from "@/components/EmergencyOverrideModal";
 import { useSupabaseTelemetry } from "@/hooks/useSupabaseTelemetry";
 import { SplineCandidate } from "@/types/trajectory";
 import { computeCompositeScore, deriveCandidateStatuses } from "@/lib/scoring";
+import type { DetectedObject } from "@/types/detection";
 
 const RAW_CANDIDATES: Omit<SplineCandidate, "compositeScore" | "status" | "statusReason">[] = [
   {
@@ -117,6 +118,10 @@ export default function Home() {
   const [isOverrideModalOpen, setIsOverrideModalOpen] = useState<boolean>(false);
   const [isOverrideActive, setIsOverrideActive] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+
+  // Live camera detection state
+  const [detectedObjects, setDetectedObjects] = useState<DetectedObject[]>([]);
+  const handleDetect = useCallback((objs: DetectedObject[]) => setDetectedObjects(objs), []);
 
   // ── Supabase Integration ────────────────────────────────────────────────
   const telemetrySnapshot = useMemo(
@@ -283,6 +288,7 @@ export default function Home() {
             latencyMs={latencyMs}
             dbStatus={dbStatus}
             lastPersistedAt={lastPersistedAt}
+            detectedObjects={detectedObjects}
           />
 
           {/* Core HUD Content Array */}
@@ -297,6 +303,8 @@ export default function Home() {
                 activeSpline={activeSpline}
                 onRecalculate={handleRecalculate}
                 isRecalculating={isRecalculating}
+                detectedObjects={detectedObjects}
+                onDetect={handleDetect}
               />
             </section>
 
@@ -307,12 +315,12 @@ export default function Home() {
             >
               {/* Left: Elastic Safety Envelope Visual Explainer (7 cols) */}
               <div className="lg:col-span-7 flex flex-col">
-                <AdaptiveSafetyBubble />
+                <AdaptiveSafetyBubble detectedObjects={detectedObjects} />
               </div>
 
               {/* Right: Real-time Costmap & Risk Matrix (5 cols) */}
               <div id="risk-matrix" className="lg:col-span-5 flex flex-col">
-                <OccupancyCostmap />
+                <OccupancyCostmap detectedObjects={detectedObjects} />
               </div>
             </section>
 

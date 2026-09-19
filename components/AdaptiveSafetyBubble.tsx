@@ -2,11 +2,17 @@
 
 import React, { useState } from "react";
 import { Shield, CheckCircle2 } from "lucide-react";
+import type { DetectedObject } from "@/types/detection";
 
-export const AdaptiveSafetyBubble: React.FC = () => {
+interface AdaptiveSafetyBubbleProps {
+  detectedObjects?: DetectedObject[];
+}
+
+export const AdaptiveSafetyBubble: React.FC<AdaptiveSafetyBubbleProps> = ({ detectedObjects = [] }) => {
   const [pinchFactor, setPinchFactor] = useState<number>(35); // 0 - 100
   const [cattleClearance, setCattleClearance] = useState<number>(50); // 0 - 100
   const [showRigidBox] = useState<boolean>(true);
+  const liveActors = detectedObjects.length;
 
   // Dynamic SVG path calculations based on pinch and clearance sliders
   const pinchY = 70 + (pinchFactor / 100) * 30; // 70 -> 100
@@ -31,7 +37,7 @@ export const AdaptiveSafetyBubble: React.FC = () => {
           </div>
           <span className="bg-surface-container-highest px-3 py-1 text-secondary font-mono text-xs rounded-full border border-secondary/30 flex items-center gap-1.5 shadow-[0_0_8px_rgba(78,222,163,0.2)]">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            Zero False Hard-Brakes
+            {liveActors > 0 ? `${liveActors} LIVE ACTORS` : "Zero False Hard-Brakes"}
           </span>
         </div>
 
