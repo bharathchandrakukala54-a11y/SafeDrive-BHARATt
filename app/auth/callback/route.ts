@@ -9,20 +9,30 @@ export async function GET(request: Request) {
   // if "next" is in param, use it as the redirect URL
   const next = searchParams.get('next') ?? '/'
 
+  // Resolve external public origin for reverse proxies (like Vercel)
+  const forwardedHost = request.headers.get('x-forwarded-host')
+  const forwardedProto = request.headers.get('x-forwarded-proto') || 'https'
+  const isLocalEnv = process.env.NODE_ENV === 'development'
+
+  const targetOrigin = (!isLocalEnv && forwardedHost)
+    ? `${forwardedProto}://${forwardedHost}`
+    : origin
+
   if (oauthError) {
-    return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent(oauthError)}`)
+    return NextResponse.redirect(`${targetOrigin}/login?error=${encodeURIComponent(oauthError)}`)
   }
 
   if (code) {
     const supabase = await createClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+      const isSuccessfulNextUrl = next.startsWith('/')
+      return NextResponse.redirect(`${targetOrigin}${isSuccessfulNextUrl ? next : '/'}`)
     } else {
-      return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent(error.message)}`)
+      return NextResponse.redirect(`${targetOrigin}/login?error=${encodeURIComponent(error.message)}`)
     }
   }
 
   // fallback redirect
-  return NextResponse.redirect(`${origin}/login?error=auth-callback-failed`)
+  return NextResponse.redirect(`${targetOrigin}/login?error=auth-callback-failed`)
 }
