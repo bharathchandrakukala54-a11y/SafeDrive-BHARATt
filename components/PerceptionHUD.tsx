@@ -253,7 +253,7 @@ export const PerceptionHUD: React.FC<PerceptionHUDProps> = ({
           </div>
 
           {/* Active Bubble Status & Layer Controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <div className="hidden md:flex items-center gap-2 bg-surface-container-lowest/90 backdrop-blur-xl px-3 py-1.5 rounded-lg border border-primary/30 shadow-lg">
               <span className="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_10px_rgba(0,240,255,1)] animate-ping" />
               <span className="font-headline font-bold text-xs text-primary tracking-wide uppercase">
@@ -261,28 +261,37 @@ export const PerceptionHUD: React.FC<PerceptionHUDProps> = ({
               </span>
             </div>
 
-            {/* Layer Filter Selector */}
-            <div className="bg-surface-container-lowest/90 backdrop-blur-xl px-1.5 py-1 rounded-lg border border-surface-container-high flex items-center gap-1 flex-wrap">
-              {(["all", "vision", "lidar", "radar", "segmentation", "camera"] as const).map(
+            {/* Layer Filter Selector (non-camera layers) */}
+            <div className="bg-surface-container-lowest/90 backdrop-blur-xl px-1.5 py-1 rounded-lg border border-surface-container-high flex items-center gap-1">
+              {(["all", "vision", "lidar", "radar", "segmentation"] as const).map(
                 (layer) => (
                   <button
                     key={layer}
                     onClick={() => setActiveLayer(layer)}
                     className={`px-2 py-0.5 font-label-caps text-[9px] rounded uppercase cursor-pointer transition-all ${
                       activeLayer === layer
-                        ? layer === "camera"
-                          ? "bg-error/20 text-error font-bold border border-error/40 shadow-[0_0_8px_rgba(239,68,68,0.3)]"
-                          : "bg-primary-container text-on-primary-container font-bold shadow-[0_0_8px_rgba(0,240,255,0.4)]"
-                        : layer === "camera"
-                        ? "text-error/70 hover:text-error hover:bg-error/10 border border-transparent"
+                        ? "bg-primary-container text-on-primary-container font-bold shadow-[0_0_8px_rgba(0,240,255,0.4)]"
                         : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high"
                     }`}
                   >
-                    {layer === "camera" ? "📷 CAM" : layer}
+                    {layer}
                   </button>
                 )
               )}
             </div>
+
+            {/* 📷 LIVE CAM — Prominent dedicated button */}
+            <button
+              onClick={() => setActiveLayer(activeLayer === "camera" ? "all" : "camera")}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold text-xs uppercase tracking-wide cursor-pointer transition-all duration-300 border ${
+                activeLayer === "camera"
+                  ? "bg-error text-white border-error shadow-[0_0_18px_rgba(239,68,68,0.7)] scale-105"
+                  : "bg-error/10 text-error border-error/50 hover:bg-error/20 hover:shadow-[0_0_14px_rgba(239,68,68,0.4)] hover:scale-105"
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${activeLayer === "camera" ? "bg-white animate-pulse" : "bg-error animate-ping"}`} />
+              <span>📷 LIVE CAM</span>
+            </button>
 
             {/* Live detection count chip */}
             {detectedObjects.length > 0 && (
