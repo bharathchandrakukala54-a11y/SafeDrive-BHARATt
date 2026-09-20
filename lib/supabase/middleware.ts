@@ -34,12 +34,24 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Site is publicly accessible — no login required.
+  const { pathname } = request.nextUrl
+
+  // Guard: redirect unauthenticated users to /login for all protected routes.
+  // /login and /auth/* are public so the login flow itself isn't blocked.
+  const isPublicPath =
+    pathname.startsWith('/login') ||
+    pathname.startsWith('/auth')
+
+  if (!user && !isPublicPath) {
+    console.log(`[middleware] No session — blocking "${pathname}", redirecting to /login`)
+    const url = request.nextUrl.clone()
+    url.pathname = '/login'
+    return NextResponse.redirect(url)
+  }
+
   // If a logged-in user visits /login, send them straight to the dashboard.
-  if (
-    user &&
-    request.nextUrl.pathname.startsWith('/login')
-  ) {
+  if (user && pathname.startsWith('/login')) {
+    console.log(`[middleware] Active session — redirecting /login → /`)
     const url = request.nextUrl.clone()
     url.pathname = '/'
     return NextResponse.redirect(url)
