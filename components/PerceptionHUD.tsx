@@ -307,8 +307,16 @@ export const PerceptionHUD: React.FC<PerceptionHUDProps> = ({
           </div>
         </div>
 
-        {/* INTERACTIVE ACTOR RETICLES */}
-        {ACTORS.map((actor) => {
+        {/* SIM MODE badge — only visible when NOT in live camera mode */}
+        {!isCameraMode && (
+          <div className="absolute top-16 left-3 z-20 flex items-center gap-1.5 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-1 rounded-md border border-tertiary-fixed-dim/40 pointer-events-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim animate-pulse" />
+            <span className="font-mono text-[9px] text-tertiary-fixed-dim font-bold tracking-widest">SIM MODE</span>
+          </div>
+        )}
+
+        {/* INTERACTIVE ACTOR RETICLES — only shown in SIM (non-camera) modes */}
+        {!isCameraMode && ACTORS.map((actor) => {
           const isSelected = selectedActor?.id === actor.id;
 
           const colorClasses = {
@@ -372,8 +380,8 @@ export const PerceptionHUD: React.FC<PerceptionHUDProps> = ({
           );
         })}
 
-        {/* SELECTED ACTOR FLOATING INSPECTION CARD */}
-        {selectedActor && (
+        {/* SELECTED ACTOR FLOATING INSPECTION CARD — only shown in SIM modes */}
+        {!isCameraMode && selectedActor && (
           <div className="absolute top-16 right-4 z-40 w-80 bg-surface-container-lowest/95 backdrop-blur-2xl p-4 rounded-xl border border-primary/50 shadow-[0_0_30px_rgba(0,240,255,0.3)] animate-in fade-in duration-200">
             <div className="flex items-center justify-between pb-2 mb-2 border-b border-surface-container-high">
               <div className="flex items-center gap-2">

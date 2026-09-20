@@ -34,17 +34,8 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth')
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
-  }
-
+  // Site is publicly accessible — no login required.
+  // If a logged-in user visits /login, send them straight to the dashboard.
   if (
     user &&
     request.nextUrl.pathname.startsWith('/login')
